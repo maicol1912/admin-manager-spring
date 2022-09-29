@@ -1,21 +1,19 @@
-package com.example.springData.Service;
+package com.example.springData.Dao;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.example.springData.Dao.UsuarioDao;
+import org.springframework.stereotype.Repository;
 
 import com.example.springData.Entity.Usuario;
+import com.example.springData.Repository.UsuarioRepository;
 
+@Repository
+public class UsuarioDaoImp implements UsuarioDao{
 
-
-@Service
-public class UsuarioServiceImp implements IUsuarioService{
     @Autowired
-    private UsuarioDao user;
+    private UsuarioRepository user;
     @Override
     public List<Usuario> findAll() {
         return (List<Usuario>) user.findAll();
@@ -23,16 +21,15 @@ public class UsuarioServiceImp implements IUsuarioService{
     @Override
     public void save(Usuario usuario) {
         user.save(usuario);
-        
     }
     @Override
     public Optional<Usuario> findOne(Long id) {
-        return user.findOne(id);
+        return user.findById(id);
 
     }
     @Override
     public void delete(Long id) {
-         user.delete(id);
+         user.deleteById(id);
         
     }
     
