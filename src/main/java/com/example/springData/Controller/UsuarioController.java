@@ -1,4 +1,5 @@
 package com.example.springData.Controller;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
+import com.example.springData.Entity.RolF;
 import com.example.springData.Entity.Usuario;
+import com.example.springData.Service.IRolService;
 import com.example.springData.Service.IUsuarioService;
 
 
@@ -17,6 +22,8 @@ import com.example.springData.Service.IUsuarioService;
 public class UsuarioController{
     @Autowired
     private IUsuarioService service;
+    @Autowired
+    private IRolService serviceRol;
 
     @GetMapping("/listar")
     public String saludar(Model model){
@@ -25,7 +32,9 @@ public class UsuarioController{
     }
     @GetMapping("/registrar")
     public String renderizarTemplate(Model model){
+        List<RolF>listarRol = serviceRol.findAll();
         model.addAttribute("usuario",new Usuario());
+        model.addAttribute("rolF",listarRol);
         return "form";
     }
     @PostMapping("/registrar")
@@ -44,7 +53,9 @@ public class UsuarioController{
     @GetMapping("/editar/{id}")
     public String editarUsuario(@PathVariable Long id,Model model){
         Optional<Usuario>usuario = service.findOne(id);
+        List<RolF>listarRol = serviceRol.findAll();
         model.addAttribute("usuario",usuario);
+        model.addAttribute("rolF",listarRol);
         return "form";
     }
     

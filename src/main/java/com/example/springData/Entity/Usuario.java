@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +23,10 @@ public class Usuario {
     private String celular;
     @Column(name = "edad")
     private int edad;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    private RolF rol;
     public Long getId() {
         return id;
     }
@@ -50,5 +56,11 @@ public class Usuario {
     }
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+    public RolF getRol() {
+        return rol;
+    }
+    public void setRol(RolF rol) {
+        this.rol = rol;
     }
 }

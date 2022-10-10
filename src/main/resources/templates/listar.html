@@ -22,6 +22,7 @@
                 <td th:text="${usuario.apellido}"></td>
                 <td th:text="${usuario.celular}"></td>
                 <td th:text="${usuario.edad}"></td>
+                <td th:text="${usuario.rol.nombre}"></td>
                 <td><a th:href="@{/usuario/editar/} + ${usuario.id}">Editar</a></td>
                 <td><a th:href="@{/usuario/eliminar/} + ${usuario.id}" onclick= "return confirm('Esta seguro que desea eliminar el registro?')">Eliminar</a></td>
             </tr>
